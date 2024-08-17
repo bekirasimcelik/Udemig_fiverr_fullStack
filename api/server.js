@@ -31,6 +31,20 @@ app.route("/health").get((req, res) => {
 //* routerları tanımla
 app.use("/api/auth", authRoutes);
 
+//* Hata yönetimi için middleware
+//* controller'lardan yapılacak tüm yönlendirmelerde bu middleware çalışacak
+app.use((err, req, res, next) => {
+  console.log("Hata merydana geldi 🥲");
+  console.log(err);
+
+  const errStatus = err.status || 500;
+  const errMessage = err.message || "500";
+
+  return res.status(errStatus).json({
+    message: errMessage,
+  });
+});
+
 //* Hangi portun dinleneceğini belirtelim
 app.listen(process.env.PORT, () => {
   console.log(`API ${process.env.PORT} portunu dinlemeye başladı ✅`);

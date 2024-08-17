@@ -1,8 +1,9 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
+import error from "../utils/error.js";
 
 //* Kayıt ol: yeni hesap oluştur
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     console.log(req.body);
 
@@ -20,10 +21,14 @@ export const register = async (req, res) => {
     });
   } catch (error) {
     //* client'a hata varsa detayları gönder
-    res.status(400).json({
-      message: "İstek başarısız",
-      err: error.message,
-    });
+    //? 1 yol
+    // const err = new Error(error);
+    // err.status = 404;
+
+    // next(err);
+
+    //? 2.yol client'a hata mesajını gönder
+    next(error(404, err));
   }
 };
 
