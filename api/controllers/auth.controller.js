@@ -15,6 +15,9 @@ export const register = async (req, res, next) => {
     //? User.create();
     const newUser = await User.create({ ...req.body, password: hashedPass });
 
+    //* Şifre alanını kaldır
+    user.password = null;
+
     //* client'a cevap gönder
     res.status(200).json({
       message: "Kullanıcı hesabı oluşturuldu",
@@ -71,8 +74,9 @@ export const login = async (req, res, next) => {
   }
 };
 
+//* Çıkış Yap: Oturum kapat
 export const logout = (req, res) => {
-  res.status(200).json({
-    message: "İstek başarılı",
+  res.clearCookie("token").status(200).json({
+    message: "Kullanıcı hesabından çıkış yapıldı",
   });
 };
