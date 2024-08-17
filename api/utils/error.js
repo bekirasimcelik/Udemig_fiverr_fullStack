@@ -7,6 +7,9 @@ const error = (status, message) => {
   //* Hata nesnesini güncelle
   err.message = message;
   err.status = status;
+
+  //* Hata nesnesini döndür
+  return err;
 };
 
 export default error;
