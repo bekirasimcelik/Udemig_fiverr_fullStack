@@ -3,6 +3,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import api from "../utils/api";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [isSeller, setIsSeller] = useState(false);
