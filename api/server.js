@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import morgan from "morgan";
+import cors from "cors";
 
 //* env dosyasındaki verilere erişmek için kurulum
 dotenv.config();
@@ -15,6 +16,9 @@ mongoose
 
 //* Express Uygulaması oluştur
 const app = express();
+
+//* CORS hatalarını önüne geçmek için header'lar ekler
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 //* Konsola istek bilgilerini yazan middleware
 app.use(morgan("dev"));
