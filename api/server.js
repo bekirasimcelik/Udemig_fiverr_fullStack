@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import gigRouter from "./routes/gig.routes.js";
+import cookieParser from "cookie-parser";
 
 //* env dosyasındaki verilere erişmek için kurulum
 dotenv.config();
@@ -24,6 +25,8 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 //* Konsola istek bilgilerini yazan middleware
 app.use(morgan("dev"));
 
+//* istekle birlikte gelen çerezleri işler
+app.use(cookieParser());
 //* middlewares (ara yazılımlar)
 //* a) body/query alanlarındaki json içeriğinin okunmasını/işlenmesini sağlar
 app.use(express.json());
