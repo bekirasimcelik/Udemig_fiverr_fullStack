@@ -1,9 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import authRoutes from "./routes/auth.routes.js";
 import morgan from "morgan";
 import cors from "cors";
+import authRoutes from "./routes/auth.routes.js";
+import gigRouter from "./routes/gig.routes.js";
 
 //* env dosyasındaki verilere erişmek için kurulum
 dotenv.config();
@@ -33,7 +34,8 @@ app.route("/health").get((req, res) => {
 });
 
 //* routerları tanımla
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRouter);
+app.use("/api/gigs", gigRouter);
 
 //* Hata yönetimi için middleware
 //* controller'lardan yapılacak tüm yönlendirmelerde bu middleware çalışacak
